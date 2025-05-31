@@ -26,6 +26,7 @@ class EnvironmentSingleton private constructor() {
         private set
     var holderWidth = 0 // 单手模式下键盘占位区域宽度
         private set
+    var chelperWidth = 0 // CHelper宽度
     var heightForCandidates = 0 // 候选词区域的高度
     var heightForComposingView = 0 // 拼音显示区域高度
     var heightForFullDisplayBar = 0 // 智能导航栏高度
@@ -36,6 +37,7 @@ class EnvironmentSingleton private constructor() {
     var isLandscape = false //键盘是否横屏
     var keyXMargin = 0 //键盘按键水平间距
     var keyYMargin = 0 //键盘按键垂直间距
+
     // 按键 + 候选词+拼音总高度，值是相对于竖屏宽度，横屏高度。
     private var keyboardHeightRatio = 0f
 
@@ -53,27 +55,32 @@ class EnvironmentSingleton private constructor() {
         var screenHeightVertical = mScreenHeight
         val oneHandedMod = AppPrefs.getInstance().keyboardSetting.oneHandedModSwitch.getValue()
         // 按键 + 后续高度，值是相对于竖屏宽度，横屏高度。
-        keyboardHeightRatio =  if(isLandscape && !keyboardModeFloat) AppPrefs.getInstance().internal.keyboardHeightRatioLandscape.getValue()
+        keyboardHeightRatio =
+            if (isLandscape && !keyboardModeFloat) AppPrefs.getInstance().internal.keyboardHeightRatioLandscape.getValue()
             else AppPrefs.getInstance().internal.keyboardHeightRatio.getValue()
-        val candidatesHeightRatio =  if(isLandscape && !keyboardModeFloat) AppPrefs.getInstance().internal.candidatesHeightRatioLandscape.getValue()
-        else AppPrefs.getInstance().internal.candidatesHeightRatio.getValue()
-        if(keyboardModeFloat){
-            screenWidthVertical = (min(dm.widthPixels, dm.heightPixels)*3f/4).toInt()
-            screenHeightVertical = (max(dm.widthPixels, dm.heightPixels)*3f/4).toInt()
+        val candidatesHeightRatio =
+            if (isLandscape && !keyboardModeFloat) AppPrefs.getInstance().internal.candidatesHeightRatioLandscape.getValue()
+            else AppPrefs.getInstance().internal.candidatesHeightRatio.getValue()
+        if (keyboardModeFloat) {
+            screenWidthVertical = (min(dm.widthPixels, dm.heightPixels) * 3f / 4).toInt()
+            screenHeightVertical = (max(dm.widthPixels, dm.heightPixels) * 3f / 4).toInt()
         }
         skbHeight = (screenHeightVertical * keyboardHeightRatio).toInt()
         // 键盘占位宽度（用于单手模式），值是相对于竖屏宽度，横屏高度。
         holderWidth = if (oneHandedMod) (screenWidthVertical * 0.2f).toInt() else 0
-        skbWidth = screenWidthVertical - holderWidth
+        holderWidth = if (oneHandedMod) (screenWidthVertical * 0.2f).toInt() else 0
+        chelperWidth = if (mScreenWidth > mScreenHeight) (screenWidthVertical * 0.3f).toInt() else 0
+        skbWidth = screenWidthVertical - holderWidth - chelperWidth
         heightForCandidates = (screenHeightVertical * candidatesHeightRatio).toInt()
-        heightForComposingView = (heightForCandidates*0.5f).toInt()
-        heightForFullDisplayBar = (heightForCandidates*0.7f).toInt()
-        heightForKeyboardMove = (heightForCandidates*0.2f).toInt()
+        heightForComposingView = (heightForCandidates * 0.5f).toInt()
+        heightForFullDisplayBar = (heightForCandidates * 0.7f).toInt()
+        heightForKeyboardMove = (heightForCandidates * 0.2f).toInt()
         keyTextSize = (skbHeight * 0.06f).toInt()
         keyTextSmallSize = (skbHeight * 0.04f).toInt()
         keyXMargin = (ThemeManager.prefs.keyXMargin.getValue() / 1000f * skbWidth).toInt()
         keyYMargin = (ThemeManager.prefs.keyYMargin.getValue() / 1000f * skbHeight).toInt()
-        candidateTextSize = (heightForCandidates * (0.3f + AppPrefs.getInstance().keyboardSetting.candidateTextSize.getValue()/100f)).toInt()
+        candidateTextSize =
+            (heightForCandidates * (0.3f + AppPrefs.getInstance().keyboardSetting.candidateTextSize.getValue() / 100f)).toInt()
         inputAreaHeight = skbHeight + heightForCandidates
     }
 
@@ -87,21 +94,26 @@ class EnvironmentSingleton private constructor() {
          */
         set(keyBoardHeightRatio) {
             keyboardHeightRatio = keyBoardHeightRatio
-            if(isLandscape) AppPrefs.getInstance().internal.keyboardHeightRatioLandscape.setValue(keyBoardHeightRatio)
+            if (isLandscape) AppPrefs.getInstance().internal.keyboardHeightRatioLandscape.setValue(
+                keyBoardHeightRatio
+            )
             else AppPrefs.getInstance().internal.keyboardHeightRatio.setValue(keyBoardHeightRatio)
         }
 
-    var keyboardModeFloat:Boolean  // 悬浮键盘模式
-        get() = if (isLandscape)AppPrefs.getInstance().internal.keyboardModeFloatLandscape.getValue() else AppPrefs.getInstance().internal.keyboardModeFloat.getValue()
+    var keyboardModeFloat: Boolean  // 悬浮键盘模式
+        get() = if (isLandscape) AppPrefs.getInstance().internal.keyboardModeFloatLandscape.getValue() else AppPrefs.getInstance().internal.keyboardModeFloat.getValue()
         set(isFloatMode) {
-            if(isLandscape) AppPrefs.getInstance().internal.keyboardModeFloatLandscape.setValue(isFloatMode)
+            if (isLandscape) AppPrefs.getInstance().internal.keyboardModeFloatLandscape.setValue(
+                isFloatMode
+            )
             else AppPrefs.getInstance().internal.keyboardModeFloat.setValue(isFloatMode)
         }
 
     companion object {
         private var mInstance: EnvironmentSingleton? = null
+
         @JvmStatic
-		val instance: EnvironmentSingleton
+        val instance: EnvironmentSingleton
             get() {
                 if (null == mInstance) {
                     mInstance = EnvironmentSingleton()

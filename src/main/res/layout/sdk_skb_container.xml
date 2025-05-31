@@ -6,6 +6,12 @@
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:layout_alignParentEnd="true">
+    <yancey.chelper.android.completion.view.CompletionView
+        android:id="@+id/layout_chelper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:visibility="gone" />
     <include
         android:id="@+id/ll_skb_holder_layout_left"
         layout="@layout/sdk_skb_holder_layout"
@@ -13,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignBottom="@+id/ll_input_keyboard_container"
+        android:layout_toEndOf="@id/layout_chelper"
         android:visibility="gone"/>
     <RelativeLayout
         android:id="@+id/ll_input_keyboard_container"

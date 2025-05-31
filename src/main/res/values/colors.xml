@@ -8,4 +8,11 @@
     <color name="x_recycler_color_loading_color1">#55777777</color>
     <color name="x_recycler_color_loading_color2">#B1777777</color>
     <color name="x_recycler_color_loading_color3">#FF777777</color>
+
+    <color name="red">#FFCC4444</color>
+    <color name="background">#F3F3F3</color>
+    <color name="background_component">#AAFFFFFF</color>
+    <color name="text_main">#FF000000</color>
+    <color name="text_secondary">#FF444444</color>
+    <color name="line">#FFF3F3F3</color>
 </resources>

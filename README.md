@@ -50,10 +50,10 @@
   临时方案：切换横竖屏前，确保输入框内容为空。
 
 ## 运行环境：
-> gradle:8.3.2  
-> kotlin-gradle-plugin:1.9.22  
-> kotlin-serialization:2.0.0  
-> Android minSdk：23  
+> gradle:8.14.1  
+> kotlin-gradle-plugin:2.1.21  
+> kotlin-serialization:2.1.21  
+> Android minSdk：24  
 > Android targetSdk：35  
 > JDK: penjdk version "17.0.11" 2024-04-16
 
