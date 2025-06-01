@@ -19,22 +19,24 @@ class AboutFragment : PreferenceFragmentCompat() {
                 findNavController().navigate(R.id.action_aboutFragment_to_privacyPolicyFragment)
             }
             addPreference(R.string.source_code, R.string.github_repo) {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(CustomConstant.YUYAN_IME_REPO)))
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(CustomConstant.CHELPER_IME_REPO)))
             }
             addPreference(R.string.license, " GPL-3.0 license ") {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(CustomConstant.LICENSE_URL)))
             }
             addCategory(R.string.app_version) {
                 isIconSpaceReserved = false
-                addPreference(R.string.version, BuildConfig.versionName){
-                    val uri = Uri.parse("${CustomConstant.YUYAN_IME_REPO}/releases/latest")
-                    startActivity(Intent(Intent.ACTION_VIEW, uri))
-                }
-                addPreference(R.string.build_git_hash, BuildConfig.AppCommitHead) {
-                    val commit = BuildConfig.AppCommitHead.substringBefore('-')
-                    val uri = Uri.parse("${CustomConstant.YUYAN_IME_REPO}/commit/${commit}")
-                    startActivity(Intent(Intent.ACTION_VIEW, uri))
-                }
+                addPreference(R.string.version, BuildConfig.versionName)
+//                {
+//                    val uri = Uri.parse("${CustomConstant.YUYAN_IME_REPO}/releases/latest")
+//                    startActivity(Intent(Intent.ACTION_VIEW, uri))
+//                }
+                addPreference(R.string.build_git_hash, BuildConfig.AppCommitHead)
+//                {
+//                    val commit = BuildConfig.AppCommitHead.substringBefore('-')
+//                    val uri = Uri.parse("${CustomConstant.YUYAN_IME_REPO}/commit/${commit}")
+//                    startActivity(Intent(Intent.ACTION_VIEW, uri))
+//                }
                 addPreference(R.string.build_time, BuildConfig.AppBuildTime)
 
             }

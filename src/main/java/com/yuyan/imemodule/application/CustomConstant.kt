@@ -15,6 +15,7 @@ object CustomConstant {
     const val SCHEMA_ZH_DOUBLE_LX17 = "double_pinyin_ls17" // 乱序17双拼
     const val SCHEMA_ZH_STROKE = "stroke" // 五笔画
     const val CURRENT_RIME_DICT_DATA_VERSIOM = 20250520
+    const val CHELPER_IME_REPO = "https://github.com/Yancey2023/CHelperIme"
     const val YUYAN_IME_REPO = "https://github.com/gurecn/YuyanIme"
     const val YUYAN_IME_REPO_GITEE = "https://gitee.com/gurecn/YuyanIme"
     const val LICENSE_URL = "https://www.gnu.org/licenses/gpl-3.0.html"

@@ -83,26 +83,27 @@ open class SettingsActivity : AppCompatActivity() {
         super.onStart()
         if (SetupActivity.shouldShowUp()) {
             startActivity<SetupActivity>()
-        } else {
-            val buildDiffDays = TimeUtils.getBuildDiffDays()
-            if(buildDiffDays >= 60){
-                AlertDialog.Builder(this)
-                    .setTitle(R.string.dialog_tips_title)
-                    .setMessage(getString(if(buildDiffDays >= 60) R.string.app_build_timeout_60 else R.string.app_build_timeout_30))
-                    .setCancelable(buildDiffDays < 60)
-                    .setNeutralButton(R.string.go_download_appstore) { _, _ ->
-                        AppUtil.launchMarketforYuyan(this)
-                    }
-                    .setNegativeButton(R.string.go_download_gitee) { _, _ ->
-                        val uri = Uri.parse("${CustomConstant.YUYAN_IME_REPO_GITEE}/releases/latest")
-                        startActivity(Intent(Intent.ACTION_VIEW, uri))
-                    }
-                    .setPositiveButton(R.string.go_download_github) { _, _ ->
-                        val uri = Uri.parse("${CustomConstant.YUYAN_IME_REPO}/releases/latest")
-                        startActivity(Intent(Intent.ACTION_VIEW, uri))
-                    }.show()
-            }
         }
+//        else {
+//            val buildDiffDays = TimeUtils.getBuildDiffDays()
+//            if(buildDiffDays >= 60){
+//                AlertDialog.Builder(this)
+//                    .setTitle(R.string.dialog_tips_title)
+//                    .setMessage(getString(if(buildDiffDays >= 60) R.string.app_build_timeout_60 else R.string.app_build_timeout_30))
+//                    .setCancelable(buildDiffDays < 60)
+//                    .setNeutralButton(R.string.go_download_appstore) { _, _ ->
+//                        AppUtil.launchMarketforYuyan(this)
+//                    }
+//                    .setNegativeButton(R.string.go_download_gitee) { _, _ ->
+//                        val uri = Uri.parse("${CustomConstant.YUYAN_IME_REPO_GITEE}/releases/latest")
+//                        startActivity(Intent(Intent.ACTION_VIEW, uri))
+//                    }
+//                    .setPositiveButton(R.string.go_download_github) { _, _ ->
+//                        val uri = Uri.parse("${CustomConstant.YUYAN_IME_REPO}/releases/latest")
+//                        startActivity(Intent(Intent.ACTION_VIEW, uri))
+//                    }.show()
+//            }
+//        }
     }
 }
 
